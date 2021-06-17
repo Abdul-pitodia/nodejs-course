@@ -1,0 +1,39 @@
+npm install --save express == production dependency command that installs express js
+
+for dev, npm install --save-dev express
+
+app = express() == express exports a function which has lot of methods to be used which ease process of backend 
+
+app.use() == its a function that takes a function, (req, res, next) where req, res are default objects and next is a function passed so that if we use another middle ware (app.use()) we can connect to this middle ware from the previous one
+
+
+app.listen() == takes a port number as argument and sets up a http server with req and res automatically
+
+app.use('<route>', funcs) == route is the route for which function should be invoked.
+
+app.use('/', funcs) == here / basically means the route starts from slash.
+however we have multiple routes that all start with a slash. we do not want this middle ware to be invoked for lets say, /product-info because we have another page for it
+so we want to have if - else type situation that for this route invoke this , or that. 
+for this we will not use "next()" as it connects two or more middleware.
+the request is parsed from top to bottom, so we want to keep pages in the top and / at bottom
+next() should only be used before sending a response because we want all things connnceted by middle ware first and then finally sending responses.
+
+
+npm install --save body-parser == this parses incoming requests (text type not all type) and this is also a middle ware that auto invokes next function, however we keep this above everything as we need to parse urls anyway
+
+
+to trigger for a get or post request, use
+
+app.post()
+or app.get() this is used for filtering and stuff
+also , get() always exactly matches the url. so order is not imp when setting routes
+
+
+res.sendFile(path.join(__dirname, <path>)) == path resolves the file directory naming system depending on os and concatenates names seperated by commas. this requires path module to be imported into the app.
+dirname gives absolute path to the file u are currently in. so if u wanna go up add ".." also
+
+
+express.static() == helps serve static files such as css, js and images which are kept in the public folder to be accessed. these are read only.
+
+
+
